@@ -1,7 +1,11 @@
 package com.identityweb.controller;
 
-import com.identityweb.Utils.MailSender;
+import com.identityweb.persistence.UserProfile;
+import com.identityweb.service.MailService;
+import com.identityweb.utils.MailSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,12 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AuthenticationController {
 
+    private static final String MAIL_VERIFICATION_LINK = "<a href=\"http://localhost:8080/verifyEmail?cid=";
+    private static final String MAIL_VERIFICATION_MESSAGE = "\">Click here to verify your email address.</a>";
+
+    @Autowired
+    private MailService mailService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout) {
 
-        System.out.println("Hello!");
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", "Invalid username and password!");
@@ -28,17 +37,11 @@ public class AuthenticationController {
 
         model.setViewName("login");
         return model;
-
     }
-
-
 
     @RequestMapping(value = "/userProfile", method = RequestMethod.GET)
     public ModelAndView userProfilePage() {
         System.out.println("Sending mail!");
-        MailSender mailSender = new MailSender("galib@therapservices.net","therap2145");
-
-        mailSender.sendMail("galib2145@gmail.com","<a href=\"http://localhost:8080/verifyEmail?cid=0123\">Click here!!</a>");
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security Custom Login Form");
         model.addObject("message", "This is protected page!");
@@ -47,4 +50,26 @@ public class AuthenticationController {
         return model;
 
     }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public void signUpPage(){
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ModelAndView processSignUpRequest(UserProfile userProfile){
+        //INSERT INTO DATABASE, GET MAIL_VERIFICATION_ID AND POPULATE
+        int mailVerificationId = 0123;
+        String mailVerificationMessage = MAIL_VERIFICATION_LINK + mailVerificationId + MAIL_VERIFICATION_MESSAGE;
+        mailService.sendMail(userProfile.getEmail(),mailVerificationMessage);
+        ModelAndView model = new ModelAndView();
+        model.setViewName("signUpCompleted");
+        return model;
+    }
+
+    @RequestMapping(value = "/verifyEmail", method = RequestMethod.GET)
+    public void verifyEmail(@RequestParam("cid") String cid){
+        //UPDATE STATUS AND SEND TO ADMIN FOR APPROVAL
+    }
 }
+
+

@@ -1,11 +1,11 @@
-package com.identityweb.Utils;
+package com.identityweb.utils;
 
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class RestClient<T> {
+public class RestServiceClient<T> {
     RestTemplate restTemplate = new RestTemplate();
     public static final String BASE_URL = "http://192.168.0.64:8080";
 

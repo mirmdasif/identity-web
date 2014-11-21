@@ -1,30 +1,34 @@
-package com.identityweb.auth;
+package com.identityweb.utils;
 
-
-import com.identityweb.dao.UserDao;
+import com.identityweb.service.AuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class IdentityAuthProvider implements AuthenticationProvider {
-    UserDao userDao = new UserDao();
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        String name = authentication.getName();
+        boolean isAuthenticated = true;
+        String username = authentication.getName();
         String password = authentication.getCredentials().toString();
+        isAuthenticated = authenticationService.authenticateUser(username,password);
 
-        if(userDao.authenticateUser(name,password)) {
+        if(isAuthenticated) {
+            //ALLOCATE ROLE FROM DB
             List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-            Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+            Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
             return auth;
         } else {
             return null;

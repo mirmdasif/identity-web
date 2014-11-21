@@ -1,4 +1,4 @@
-package com.identityweb.config;
+package com.identityweb.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {

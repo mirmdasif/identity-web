@@ -1,4 +1,4 @@
-package com.identityweb.config;
+package com.identityweb.config.web;
 
 
 import org.springframework.context.annotation.Bean;

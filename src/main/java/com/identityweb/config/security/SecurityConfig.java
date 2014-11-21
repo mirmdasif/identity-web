@@ -1,7 +1,6 @@
-package com.identityweb.config;
+package com.identityweb.config.security;
 
-
-import com.identityweb.auth.IdentityAuthProvider;
+import com.identityweb.utils.IdentityAuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String LOGIN_URL = "/j_spring_security_check";
+    private static final String LOGOUT_URL = "/j_spring_security_logout";
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -25,14 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login","/signup","/upload").permitAll()
-                .antMatchers(("/hello")).access("hasRole('ROLE_USER')")
+                .antMatchers("/login","/signup").permitAll()
+                .antMatchers(("/userProfile")).access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/userProfile")
-                .loginProcessingUrl("/j_spring_security_check")
+                .loginProcessingUrl(LOGIN_URL)
                 .usernameParameter("username").passwordParameter("password")
                 .and()
-                .logout().logoutSuccessUrl("/login?logout").logoutUrl("/j_spring_security_logout")
+                .logout().logoutSuccessUrl("/login?logout").logoutUrl(LOGOUT_URL)
                 .and()
                 .csrf();
 

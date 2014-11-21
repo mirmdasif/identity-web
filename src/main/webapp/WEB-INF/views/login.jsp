@@ -1,76 +1,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Login Page</title>
-    <style>
-        .error {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
-
-        .msg {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
-
-        #login-box {
-            width: 300px;
+<meta charset="UTF-8">
+<title>Log in</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    .bs-example{
+            width: 500px;
             padding: 20px;
             margin: 100px auto;
             background: #fff;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border: 1px solid #000;
-        }
-    </style>
+    }
+</style>
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body>
+        <div class="bs-example">
+             <form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="username" class="form-control" name="username" id="inputUsername" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </div>
 
-<h1>Spring Security Custom Login Form (Annotation)</h1>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<div id="login-box">
+                <c:if test="${not empty error}">
+                    <div class="form-group">
+                        <label>
+                            ${error}
+                        </label>
+                    </div>
+                </c:if>
+                <c:if test="${not empty msg}">
+                    <div class="form-group">
+                        <label>
+                            ${msg}
+                        </label>
+                    </div>
+                </c:if>
 
-    <h3>Login with Username and Password</h3>
-
-    <c:if test="${not empty error}">
-        <div class="error">${error}</div>
-    </c:if>
-    <c:if test="${not empty msg}">
-        <div class="msg">${msg}</div>
-    </c:if>
-
-    <form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
-
-        <table>
-            <tr>
-                <td>User:</td>
-                <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='password' name='password' /></td>
-            </tr>
-            <tr>
-                <td colspan='2'>
-                    <input name="submit" type="submit" value="submit" />
-                </td>
-            </tr>
-        </table>
-
-        <input type="hidden"
-               name="${_csrf.parameterName}" value="${_csrf.token}" />
-    </form>
-</div>
-
+            </form>
+        </div>
 </body>
-</html>
+</html>                                     
