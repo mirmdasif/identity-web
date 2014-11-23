@@ -1,18 +1,57 @@
 package com.identityweb.persistence;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="SIGN_UP_REQUESTS")
 public class UserProfile {
-    private String fullName;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="ID")
+    private int id;
+
+    @Column(name="FIRST_NAME")
+    private String firstName;
+
+    @Column(name="LAST_NAME")
+    private String lastName;
+
+    @Column(name="USER_NAME")
     private String username;
+
+    @Column(name="EMAIL")
     private String email;
+
+    @Column(name="PASSWORD")
     private String password;
+
+    @Column(name="CONTACT")
     private String contact;
 
-    public String getFullName() {
-        return fullName;
+
+    public int getId() {
+        return id;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
