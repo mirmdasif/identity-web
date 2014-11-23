@@ -1,5 +1,6 @@
 package com.identityweb.config.web;
 import com.identityweb.config.core.CoreConfig;
+import com.identityweb.config.persistence.DatabaseConfig;
 import com.identityweb.config.security.SecurityConfig;
 import com.identityweb.config.utils.MailConfig;
 import org.springframework.boot.context.embedded.MultiPartConfigFactory;
@@ -18,7 +19,7 @@ public class WebAppInitializer extends
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { CoreConfig.class, SecurityConfig.class, MailConfig.class };
+        return new Class<?>[] { CoreConfig.class, SecurityConfig.class, MailConfig.class, DatabaseConfig.class};
     }
 
     @Override
