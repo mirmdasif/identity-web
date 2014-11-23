@@ -21,27 +21,23 @@
         <div class="bs-example">
             <form method="POST" action="/signup">
                 <div class="form-group">
-                    <label for="input">Full name</label>
-                    <input class="form-control" id="inputName" placeholder="Name" name="fullName">
+                    <label>First name</label>
+                    <input class="form-control" id="inputFirstName" placeholder="First name" name="firstName">
                 </div>
                 <div class="form-group">
-                    <label for="input">Username</label>
+                    <label>Last name</label>
+                    <input class="form-control" id="inputLastName" placeholder="Last name" name="lastName">
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
                     <input class="form-control" id="inputUsername" placeholder="Username" name="username">
                 </div>
                 <div class="form-group">
-                    <label for="input">Email</label>
+                    <label>Email</label>
                     <input class="form-control" id="inputEmail" placeholder="Email" name="email">
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword">Retype password</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Retype password">
-                </div>
-                <div class="form-group">
-                    <label for="input">Contact</label>
+                    <label>Contact</label>
                     <input class="form-control" id="inputContact" placeholder="Contact" name="contact">
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

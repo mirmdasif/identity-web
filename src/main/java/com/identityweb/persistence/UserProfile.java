@@ -1,10 +1,11 @@
 package com.identityweb.persistence;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="SIGN_UP_REQUESTS")
-public class UserProfile {
+public class UserProfile implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -23,12 +24,23 @@ public class UserProfile {
     @Column(name="EMAIL")
     private String email;
 
-    @Column(name="PASSWORD")
-    private String password;
-
     @Column(name="CONTACT")
     private String contact;
 
+    @Column(name="REQUEST_STATUS")
+    private String requestStatus;
+
+    @Column(name="EMAIL_VERIFICATION_STATUS")
+    private String emailVerificationStatus;
+
+
+    public String getEmailVerificationStatus() {
+        return emailVerificationStatus;
+    }
+
+    public void setEmailVerificationStatus(String emailVerificationStatus) {
+        this.emailVerificationStatus = emailVerificationStatus;
+    }
 
     public int getId() {
         return id;
@@ -36,6 +48,14 @@ public class UserProfile {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
     }
 
     public String getFirstName() {
@@ -68,14 +88,6 @@ public class UserProfile {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getContact() {

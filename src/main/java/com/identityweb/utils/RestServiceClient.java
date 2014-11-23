@@ -1,5 +1,6 @@
 package com.identityweb.utils;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -12,8 +13,11 @@ public class RestServiceClient<T> {
     public T getObject(String path, MultiValueMap<String, String> params,T object){
         UriComponents uriComponents = UriComponentsBuilder.fromUriString(BASE_URL).path(path).queryParams(params).build();
         System.out.println("The Request is as follows :  " + uriComponents.toUri().toString() );
-        Object reponseObject =  restTemplate.getForObject(uriComponents.toUri(), object.getClass() );
-        T obj = (T)reponseObject;
-        return  obj;
+        ResponseEntity<?> response =  restTemplate.getForEntity(uriComponents.toUri(), object.getClass() );
+        if(response.getStatusCode().value() == 200) {
+            T obj = (T) response.getBody();
+            return obj;
+        }
+        return null;
     }
 }

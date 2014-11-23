@@ -2,10 +2,9 @@ package com.identityweb.controller;
 
 import com.identityweb.persistence.UserProfile;
 import com.identityweb.service.MailService;
-import com.identityweb.utils.MailSender;
+import com.identityweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AuthenticationController {
 
-    private static final String MAIL_VERIFICATION_LINK = "<a href=\"http://localhost:8080/verifyEmail?cid=";
+    private static final String MAIL_VERIFICATION_LINK = "<a href=\"http://192.168.0.72:8080/verifyEmail?cid=";
     private static final String MAIL_VERIFICATION_MESSAGE = "\">Click here to verify your email address.</a>";
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
@@ -57,8 +59,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView processSignUpRequest(UserProfile userProfile){
-        //INSERT INTO DATABASE, GET MAIL_VERIFICATION_ID AND POPULATE
-        int mailVerificationId = 0123;
+        int mailVerificationId = userService.saveSignUpRequest(userProfile);
         String mailVerificationMessage = MAIL_VERIFICATION_LINK + mailVerificationId + MAIL_VERIFICATION_MESSAGE;
         mailService.sendMail(userProfile.getEmail(),mailVerificationMessage);
         ModelAndView model = new ModelAndView();
@@ -68,7 +69,8 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/verifyEmail", method = RequestMethod.GET)
     public void verifyEmail(@RequestParam("cid") String cid){
-        //UPDATE STATUS AND SEND TO ADMIN FOR APPROVAL
+        userService.updateEmailVerificationStatus(cid);
+        //VERIFICATION SUCCESSFUL!
     }
 }
 
