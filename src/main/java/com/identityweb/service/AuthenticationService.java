@@ -16,21 +16,14 @@ public class AuthenticationService {
     }
 
     public boolean authenticateUser(String username, String password){
-        String path = "/authentication";
+        String path = "/authenticate";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("username",username);
         params.add("password",password);
 
-
-        if((username.equals("galib") && password.equals("galib")) || (username.equals("kamrul") && password.equals("kamrul"))){
+        boolean isAuth = (boolean)restServiceClient.getObject(path, params, new User());
+        if(isAuth)
             return true;
-        }
-
-        /*User user = restServiceClient.getObject(path, params, new User());
-        if(user.getUsername()!=null) {
-            return true;
-        }*/
-
         return false;
     }
 }
