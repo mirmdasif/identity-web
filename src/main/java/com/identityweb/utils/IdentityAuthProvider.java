@@ -28,6 +28,7 @@ public class IdentityAuthProvider implements AuthenticationProvider {
             //ALLOCATE ROLE FROM DB
             List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
             return auth;
         } else {
