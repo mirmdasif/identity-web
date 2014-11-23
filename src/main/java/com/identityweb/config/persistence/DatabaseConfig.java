@@ -1,5 +1,6 @@
 package com.identityweb.config.persistence;
 
+import com.identityweb.dao.UserDao;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,10 @@ public class DatabaseConfig {
     private static final String DATABASE_USER = "root";
     private static final String DATABASE_PASSWORD = "therap";
 
-
+    @Bean
+    public UserDao userDao(){
+        return new UserDao();
+    }
 
     @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {

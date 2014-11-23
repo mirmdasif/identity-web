@@ -1,7 +1,7 @@
 package com.identityweb.service;
 
-import com.identityweb.utils.RestServiceClient;
 import com.identityweb.domain.User;
+import com.identityweb.utils.RestServiceClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 

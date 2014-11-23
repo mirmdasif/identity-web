@@ -1,7 +1,7 @@
 package com.identityweb.config.utils;
 
-import com.identityweb.utils.MailSender;
 import com.identityweb.service.MailService;
+import com.identityweb.utils.MailSender;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

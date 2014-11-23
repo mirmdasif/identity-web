@@ -2,6 +2,7 @@ package com.identityweb.utils;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
