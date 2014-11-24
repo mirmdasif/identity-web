@@ -1,7 +1,7 @@
 package com.identityweb.config.core;
 
 import com.identityweb.dao.UserDao;
-import com.identityweb.domain.User;
+import com.identityweb.domain.UserData;
 import com.identityweb.service.AuthenticationService;
 import com.identityweb.service.UserService;
 import com.identityweb.utils.RestServiceClient;
@@ -28,7 +28,7 @@ public class CoreConfig {
     }
 
     @Bean
-    public RestServiceClient<User> identityRestServiceClient(){
-        return  new RestServiceClient<User>();
+    public RestServiceClient identityRestServiceClient(){
+        return  new RestServiceClient();
     }
 }

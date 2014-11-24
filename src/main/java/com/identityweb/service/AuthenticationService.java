@@ -1,6 +1,6 @@
 package com.identityweb.service;
 
-import com.identityweb.domain.User;
+import com.identityweb.domain.UserData;
 import com.identityweb.utils.RestServiceClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -9,9 +9,9 @@ import org.springframework.util.MultiValueMap;
  * Created by galib2145 on 11/20/14.
  */
 public class AuthenticationService {
-    RestServiceClient<User> restServiceClient;
+    RestServiceClient restServiceClient;
 
-    public AuthenticationService(RestServiceClient<User> restServiceClient){
+    public AuthenticationService(RestServiceClient restServiceClient){
         this.restServiceClient = restServiceClient;
     }
 
@@ -26,7 +26,7 @@ public class AuthenticationService {
             return true;
         }
 
-        /*User user = restServiceClient.getObject(path, params, new User());
+        /*UserData user = restServiceClient.getObject(path, params, new UserData());
         if(user.getUsername()!=null) {
             return true;
         }*/
