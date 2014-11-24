@@ -1,7 +1,10 @@
 package com.identityweb.config.core;
 
 import com.identityweb.dao.UserDao;
+<<<<<<< HEAD
 import com.identityweb.domain.UserData;
+=======
+>>>>>>> upstream/master
 import com.identityweb.service.AuthenticationService;
 import com.identityweb.service.UserService;
 import com.identityweb.utils.RestServiceClient;

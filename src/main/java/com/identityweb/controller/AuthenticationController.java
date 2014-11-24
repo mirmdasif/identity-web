@@ -3,12 +3,17 @@ package com.identityweb.controller;
 import com.identityweb.persistence.UserProfile;
 import com.identityweb.service.MailService;
 import com.identityweb.service.UserService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -22,6 +27,7 @@ public class AuthenticationController {
 
     @Autowired
     private UserService userService;
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
@@ -42,13 +48,11 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/userProfile", method = RequestMethod.GET)
-    public ModelAndView userProfilePage() {
-        System.out.println("Sending mail!");
+    public ModelAndView userProfilePage(HttpSession session) {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security Custom Login Form");
         model.addObject("message", "This is protected page!");
         model.setViewName("userProfile");
-
         return model;
 
     }

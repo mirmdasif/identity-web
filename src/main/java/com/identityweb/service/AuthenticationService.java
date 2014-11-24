@@ -16,15 +16,18 @@ public class AuthenticationService {
     }
 
     public boolean authenticateUser(String username, String password){
-        String path = "/authentication";
+        String path = "/accounts/authenticate";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("username",username);
         params.add("password",password);
-
-
-        if((username.equals("galib") && password.equals("galib")) || (username.equals("kamrul") && password.equals("kamrul"))){
+        Object result = restServiceClient.getObjectWithQueryParameters(path, params, new UserData());
+        if(result==null)
+            return false;
+        else {
             return true;
+            //SET USER HERE AS SESSION
         }
+<<<<<<< HEAD
 
         /*UserData user = restServiceClient.getObject(path, params, new UserData());
         if(user.getUsername()!=null) {
@@ -32,5 +35,8 @@ public class AuthenticationService {
         }*/
 
         return false;
+=======
+>>>>>>> upstream/master
     }
+
 }
