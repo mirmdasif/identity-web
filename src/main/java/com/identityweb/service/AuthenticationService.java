@@ -27,16 +27,6 @@ public class AuthenticationService {
             return true;
             //SET USER HERE AS SESSION
         }
-<<<<<<< HEAD
-
-        /*UserData user = restServiceClient.getObject(path, params, new UserData());
-        if(user.getUsername()!=null) {
-            return true;
-        }*/
-
-        return false;
-=======
->>>>>>> upstream/master
     }
 
 }
