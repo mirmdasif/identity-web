@@ -2,10 +2,10 @@ package com.identityweb.domain;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User {
+public class UserData {
     private String username;
-    private String password;
 
     public String getUsername() {
         return username;
@@ -15,11 +15,4 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

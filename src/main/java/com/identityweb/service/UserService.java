@@ -1,10 +1,11 @@
 package com.identityweb.service;
 
 import com.identityweb.dao.UserDao;
+import com.identityweb.domain.UserData;
 import com.identityweb.persistence.UserProfile;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserService {
-
    UserDao userDao;
 
    public UserService(UserDao userDao){
@@ -23,6 +24,5 @@ public class UserService {
        UserProfile userProfile = userDao.getUserById(emailVerificationId);
        userProfile.setEmailVerificationStatus("Verified");
        userDao.updateUserProfile(userProfile);
-
    }
 }
